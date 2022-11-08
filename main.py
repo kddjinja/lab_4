@@ -24,19 +24,16 @@ def play():
 
 
 def clicked():
-    letters = ['q', 'w', 'e', 'r', 't', 'y', 'u',
-               'i', 'o', 'p', 'a', 's', 'd', 'f',
-               'g', 'h', 'j', 'k', 'l', 'z', 'x',
-               'c', 'v', 'b', 'n', 'm']
     symbols = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     res = txt.get()
     if (len(res) != 5):
         messagebox.showinfo(title='Ошибка!', message='Введите не более 5 символов!')
-    elif ((str(res)[i] not in symbols) for i in range(len(res))):
+    elif (((str(res))[0] not in symbols) or ((str(res))[1] not in symbols)
+          or ((str(res))[2] not in symbols) or ((str(res))[3] not in symbols)
+          or ((str(res))[4] not in symbols)):
         messagebox.showinfo(title='Ошибка!', message='Формат ввода не соответствует системе счисления')
     else:
         code = ''
-        # numbers = ''
         code += str(int(res, 16))[0]
         for i in range(4):
             code += str(random.randint(0, 9))
@@ -50,18 +47,6 @@ def clicked():
             code += str(random.randint(0, 9))
         code += str(int(res, 16))[len(res) - 2]
         code += str(int(res, 16))[len(res) - 1]
-        # code += ''.join((random.choice(res)) for x in range(3)).upper()
-        # code += '-'
-        # for i in range(len(res)):
-        #     if (ord(str(res[i]).upper()) - 64 >= 20):
-        #         numbers += str(ord(str(res[i]).upper()) - 84)
-        #     elif (ord(str(res[i]).upper()) - 64 >= 10):
-        #         numbers += str(ord(str(res[i]).upper()) - 74)
-        #     else:
-        #         numbers += str(ord(str(res[i]).upper()) - 64)
-        # code += ''.join((random.choice(numbers)) for x in range(6))
-        # code += '-'
-        # code += ''.join((random.choice(res)) for x in range(3)).upper()
         Slide()
 
         play()
@@ -87,8 +72,5 @@ Progress_Bar.grid(row=0, column=0)
 
 btn = Button(window, text="Сгенерировать ключ", command=clicked)
 btn.place(relx=.5, rely=.7, anchor="c")
-
-# Button(window,text='Run',command=Slide).pack(pady=10)
-
 
 window.mainloop()
